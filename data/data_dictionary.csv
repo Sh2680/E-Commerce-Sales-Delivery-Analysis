@@ -1,0 +1,85 @@
+table,column,data_type,description
+customers,customer_id,Text (ID),Unique per order; key to orders
+customers,customer_unique_id,Text (ID),Identifies the real customer; used for repeat-customer analysis
+customers,customer_zip_code_prefix,Text,First 5 digits of the zip code
+customers,customer_city,Text,Customer city
+customers,customer_state,Text,Brazilian state code (2 letters)
+sellers,seller_id,Text (ID),Unique seller
+sellers,seller_zip_code_prefix,Text,First 5 digits of the zip code
+sellers,seller_city,Text,Seller city
+sellers,seller_state,Text,Seller state code
+products,product_id,Text (ID),Unique product
+products,product_category_name,Text,Category name in Portuguese
+products,product_name_length,Integer,"Characters in the product name (CSV header spelled ""lenght"")"
+products,product_description_length,Integer,"Characters in the product description (CSV header spelled ""lenght"")"
+products,product_photos_qty,Integer,Number of product photos
+products,product_weight_g,Integer,Weight in grams
+products,product_length_cm,Integer,Package length in cm
+products,product_height_cm,Integer,Package height in cm
+products,product_width_cm,Integer,Package width in cm
+category_translation,product_category_name,Text,Category name in Portuguese
+category_translation,product_category_name_english,Text,Category name in English
+orders,order_id,Text (ID),Unique order
+orders,customer_id,Text (ID),Links to customers
+orders,order_status,Category,"delivered, shipped, canceled, unavailable, invoiced, processing, created, approved"
+orders,order_purchase_timestamp,Datetime,When the order was placed
+orders,order_approved_at,Datetime,When payment was approved
+orders,order_delivered_carrier_date,Datetime,When the order was handed to the carrier
+orders,order_delivered_customer_date,Datetime,When the customer received the order
+orders,order_estimated_delivery_date,Datetime,Delivery date promised to the customer
+order_items,order_id,Text (ID),Links to orders
+order_items,order_item_id,Integer,Item sequence number within the order
+order_items,product_id,Text (ID),Links to products
+order_items,seller_id,Text (ID),Links to sellers
+order_items,shipping_limit_date,Datetime,Seller deadline to hand the item to the carrier
+order_items,price,Decimal (R$),Item price
+order_items,freight_value,Decimal (R$),Freight charged for the item
+order_payments,order_id,Text (ID),Links to orders
+order_payments,payment_sequential,Integer,Sequence when several payment methods are used
+order_payments,payment_type,Category,"credit_card, boleto, voucher, debit_card, not_defined"
+order_payments,payment_installments,Integer,Number of instalments chosen
+order_payments,payment_value,Decimal (R$),Amount paid
+order_reviews,review_id,Text (ID),Review identifier (not unique on its own; unique with order_id)
+order_reviews,order_id,Text (ID),Links to orders
+order_reviews,review_score,Integer,Rating from 1 (worst) to 5 (best)
+order_reviews,review_creation_date,Datetime,Date the satisfaction survey was sent
+order_reviews,review_answer_timestamp,Datetime,Date the customer answered
+order_summary (derived),order_id,Text (ID),One row per order
+order_summary (derived),customer_id,Text (ID),Customer for the order
+order_summary (derived),customer_unique_id,Text (ID),Real customer identifier
+order_summary (derived),customer_city,Text,Customer city
+order_summary (derived),customer_state,Text,Customer state
+order_summary (derived),order_status,Category,Order status
+order_summary (derived),order_purchase_timestamp,Datetime,Purchase time
+order_summary (derived),purchase_date,Date,Purchase date
+order_summary (derived),purchase_year,Integer,Year of purchase
+order_summary (derived),purchase_month,Text,Month of purchase as YYYY-MM
+order_summary (derived),purchase_hour,Integer,Hour of purchase (0-23)
+order_summary (derived),weekday_num,Integer,"Weekday number, 0 = Monday"
+order_summary (derived),weekday_name,Text,Weekday name
+order_summary (derived),order_delivered_customer_date,Datetime,Delivery time
+order_summary (derived),order_estimated_delivery_date,Datetime,Estimated delivery time
+order_summary (derived),delivery_days,Integer,Days from purchase to delivery
+order_summary (derived),estimated_days,Integer,Days from purchase to estimated delivery
+order_summary (derived),delay_days,Integer,Delivery date minus estimated date; above 0 means late
+order_summary (derived),is_late,Integer,"1 = late, 0 = on time or early, NULL = not delivered"
+order_summary (derived),item_count,Integer,Number of items in the order
+order_summary (derived),items_revenue,Decimal (R$),Sum of item prices
+order_summary (derived),freight,Decimal (R$),Sum of freight
+order_summary (derived),payment_value,Decimal (R$),Sum of all payments for the order
+order_summary (derived),avg_review_score,Decimal,Average review score for the order
+item_detail (derived),order_id,Text (ID),Order
+item_detail (derived),order_item_id,Integer,Item number
+item_detail (derived),product_id,Text (ID),Product
+item_detail (derived),category,Text,"English category, ""unknown"" if missing"
+item_detail (derived),seller_id,Text (ID),Seller
+item_detail (derived),seller_state,Text,Seller state
+item_detail (derived),seller_city,Text,Seller city
+item_detail (derived),price,Decimal (R$),Item price
+item_detail (derived),freight_value,Decimal (R$),Item freight
+item_detail (derived),order_status,Category,Order status
+item_detail (derived),purchase_month,Text,Month of purchase as YYYY-MM
+item_detail (derived),customer_state,Text,Customer state
+item_detail (derived),is_late,Integer,Late flag from order_summary
+item_detail (derived),delay_days,Integer,Delay in days from order_summary
+item_detail (derived),avg_review_score,Decimal,Order review score

@@ -1,0 +1,3 @@
+delivery_outcome,orders,avg_review_score,pct_negative_reviews,avg_delivery_days
+"On time / early",89936,4.29,9.23,10.9
+Late,6534,2.27,62.36,33.9

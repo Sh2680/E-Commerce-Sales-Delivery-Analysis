@@ -1,0 +1,2 @@
+delivered_orders,unique_customers,total_revenue,total_freight,avg_order_value,avg_delivery_days,avg_estimated_days,late_delivery_pct,avg_review_score
+96478,93358,13221498.11,2198275.64,137.04,12.5,24.4,6.77,4.16
