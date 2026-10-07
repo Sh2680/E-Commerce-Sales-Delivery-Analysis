@@ -118,7 +118,7 @@ CSV files -> MySQL tables -> Quality checks -> Analysis -> Excel dashboard -> Re
   <img src="documents/images/fig06_rfm_segments.png" width="48%" alt="RFM customer segments">
 </p>
 
-All 20 query results, with the business question for each, are in the [full report](documents/Olist_E_Commerce_sales_analysis_Report.pdf).
+All 20 query results, with the business question for each, are in the [full report](documents/Olist_E_Commerce_sales_analysis_report.pdf).
 
 ## Dashboard
 
@@ -166,7 +166,6 @@ olist-ecommerce-analytics/
 │
 └── documents/
     ├── Olist_Final_Project_Report.pdf   # full project report
-    ├── Olist_Final_Project_Report.docx  # editable Word version
     └── images/                          # charts used in the report
 ```
 
