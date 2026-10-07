@@ -18,9 +18,8 @@
 7. [Key Findings](#key-findings)
 8. [Dashboard](#dashboard)
 9. [Business Recommendations](#business-recommendations)
-10. [How to Reproduce](#how-to-reproduce)
-11. [Project Structure](#project-structure)
-12. [Conclusion and Future Scope](#conclusion-and-future-scope)
+10. [Project Structure](#project-structure)
+11. [Conclusion and Future Scope](#conclusion-and-future-scope)
 
 ---
 
@@ -60,7 +59,7 @@ The scenario is a learning framing: an analyst supporting the operations and cus
 | Database and analysis | MySQL 8, MySQL Workbench |
 | SQL techniques | Joins, CTEs, window functions (`LAG`, `RANK`, `NTILE`, `FIRST_VALUE`, running totals), `CASE`, date functions |
 | Dashboard | Microsoft Excel (tables, formulas, charts, conditional formatting) |
-| Documentation | Word and PDF report, Git and GitHub |
+| Documentation |  PDF report, Git and GitHub |
 
 ## Dataset
 
@@ -71,14 +70,14 @@ The scenario is a learning framing: an analyst supporting the operations and cus
 | **Records** | 99,441 orders, 112,650 order items, 103,886 payments, 99,224 reviews |
 | **Not used** | The geolocation file (about 1 million rows). It is not needed for this analysis and is not included here |
 | **Target variable** | None. This is descriptive and diagnostic analysis |
-| **Licence** | Listed on Kaggle as CC BY-NC-SA 4.0 (non-commercial, share-alike). Please check the dataset page and credit Olist |
+| **Licence** | Listed on Kaggle as CC BY-NC-SA 4.0 (non-commercial, share-alike) |
 
-The data is anonymised. Customer and seller identities are replaced by IDs.
+
 
 ## Methodology
 
 ```
-CSV files -> MySQL tables -> Quality checks -> Analysis tables -> 20 SQL queries -> Excel dashboard -> Recommendations
+CSV files -> MySQL tables -> Quality checks -> Analysis -> Excel dashboard -> Recommendations
 ```
 
 1. **Load.** Created 8 tables with keys and indexes, then loaded the CSV files. Row counts were checked against the expected counts.
@@ -119,7 +118,7 @@ CSV files -> MySQL tables -> Quality checks -> Analysis tables -> 20 SQL queries
   <img src="documents/images/fig06_rfm_segments.png" width="48%" alt="RFM customer segments">
 </p>
 
-All 20 query results, with the business question for each, are in the [full report](documents/Olist_Final_Project_Report.pdf).
+All 20 query results, with the business question for each, are in the [full report](documents/Olist_E_Commerce_sales_analysis_Report.pdf).
 
 ## Dashboard
 
@@ -141,21 +140,6 @@ A one-page Excel dashboard with six KPI cards, three key insights and six charts
 
 **Illustrative impact (scenario estimates, not forecasts):** cutting late orders by half would lift the average review from 4.16 to about 4.23 and remove about 1,700 one- and two-star reviews. Raising the repeat rate by one point would add about R$ 128K revenue, and reactivating 5% of at-risk big spenders about R$ 202K.
 
-## How to Reproduce
-
-1. Install MySQL 8 and MySQL Workbench.
-2. Copy the CSV files from `data/raw/` (6 files) and `data/cleaned/` (2 files) into one folder with no spaces in the path, for example `C:/olist_data/`.
-3. Allow local loading: run `SET GLOBAL local_infile = 1;`, then in Workbench open *Edit Connection > Advanced > Others*, add `OPT_LOCAL_INFILE=1` and reconnect.
-4. Run the scripts in order:
-
-| Script | What it does | Check |
-|---|---|---|
-| `sql/01_create_database_and_tables.sql` | Creates the database and 8 tables | `SHOW TABLES` lists 8 tables |
-| `sql/02_load_data.sql` | Loads the CSV files (edit the folder path if needed) | All 8 rows read `OK` |
-| `sql/03_data_quality_and_cleaning.sql` | Runs quality checks, builds `order_summary` and `item_detail` | Both revenue totals equal 13,591,643.70 |
-| `sql/04_analysis_queries.sql` | 20 analysis queries; run one at a time | Q1 returns 96,478 orders and revenue 13,221,498.11 |
-
-5. Export each result as CSV, or use the files in `data/query_results/`, and open `excel/Olist_OnePage_Dashboard.xlsx`. Click **Enable Editing** if prompted.
 
 ## Project Structure
 
@@ -190,14 +174,6 @@ olist-ecommerce-analytics/
 
 The marketplace is growing and its sales are healthy, but its main weakness is experience and loyalty. Late deliveries sharply lower satisfaction, delays are concentrated in particular regions, months and sellers, and almost no customers come back. Fixing delivery control, regional logistics, seller standards and retention gives the clearest return.
 
-**Limitations:** the data is observational (patterns show association, not proven cause), covers only 2016 to 2018 for one business, and has no cost data.
-
 **Next steps:** predict late deliveries and negative reviews with machine learning, forecast demand for peak planning, analyse the Portuguese review text, map seller-to-customer distance with the geolocation data, estimate customer lifetime value, and rebuild the dashboard in Power BI or Tableau.
 
-## Author
 
-**[Your Name]** | [LinkedIn link] | [email]
-
-## Acknowledgements
-
-Dataset by Olist, published on Kaggle. This is an independent portfolio project and is not affiliated with Olist.
